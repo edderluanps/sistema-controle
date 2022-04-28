@@ -15,7 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.eluanps.sistemacontrole.controllers.exceptions.ApiErrors;
 
 @RestControllerAdvice
-public class ApplicationControllerAdvice {
+public class ControllerAdvice {
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

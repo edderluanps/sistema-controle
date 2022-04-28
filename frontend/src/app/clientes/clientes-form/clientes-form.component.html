@@ -5,8 +5,20 @@
 <div class="container">
 
     <form #clientForm="ngForm" (ngSubmit)="onSubmit()">
+
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-mb-12">
+                <div class="alert alert-success" role="alert" *ngIf="success == true">
+                    Cliente salvo com sucesso!
+                </div>
+                <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+                {{ erro }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" *ngIf="cliente.id">
                 <div class="form-group">
                     <label>ID:</label>
                     <input type="text" class="form-control" name="id"
@@ -16,17 +28,17 @@
 
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Data Cadastro:</label>
-                    <input type="text" class="form-control" name="dataCadastro" 
-                    [(ngModel)]="cliente.dataCadastro" disabled="true">
+                    <label>Nome:*</label>
+                    <input type="text" class="form-control" name="nome"
+                    [(ngModel)]="cliente.nome">
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="form-group">
-                    <label>Nome:*</label>
-                    <input type="text" class="form-control" name="nome"
-                    [(ngModel)]="cliente.nome">
+                <div class="form-group" *ngIf="cliente.dataCadastro">
+                    <label>Data Cadastro:</label>
+                    <input type="text" class="form-control" name="dataCadastro" 
+                    [(ngModel)]="cliente.dataCadastro" disabled="true">
                 </div>
             </div>
 
