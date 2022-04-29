@@ -1,5 +1,7 @@
 package com.eluanps.sistemacontrole.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,11 @@ public class ClienteController {
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
+	@GetMapping
+	public List<Cliente> getAll(){
+		return clienteRepository.findAll();
+	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
