@@ -19,9 +19,9 @@ Aplicação Full Stack com Spring, Angular e MySQL
 * H2 (Testes)
 * MySQL
 
-## Instalação
+# Instalação
 
-# Back end
+## Back end
 
 1- Baixe o ZIP do projeto
 
