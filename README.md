@@ -1,21 +1,21 @@
 # Sobre
 Aplicação Full Stack com Spring, Angular e MySQL
 
-## Tecnologias
+# Tecnologias
 
-# Back end
+## Back end
 * Java (JDK 17)
 * Spring Framework
 * JPA/Hibernate
 * Lombok 
 
-# Front end
+## Front end
 * HTML/CSS
 * JS/TypeScript
 * Angular
 * Bootstrap 4 (Template SB Admin)
 
-# Banco de dados
+## Banco de dados
 * H2 (Testes)
 * MySQL
 
