@@ -1,27 +1,27 @@
 # Sobre
 Aplicação Full Stack com Spring, Angular e MySQL
 
-## Tecnologias
+# Tecnologias
 
-# Back end
+## Back end
 * Java (JDK 17)
 * Spring Framework
 * JPA/Hibernate
 * Lombok 
 
-# Front end
+## Front end
 * HTML/CSS
 * JS/TypeScript
 * Angular
 * Bootstrap 4 (Template SB Admin)
 
-# Banco de dados
+## Banco de dados
 * H2 (Testes)
 * MySQL
 
-## Instalação
+# Instalação
 
-# Back end
+## Back end
 
 1- Baixe o ZIP do projeto
 
@@ -29,7 +29,7 @@ Aplicação Full Stack com Spring, Angular e MySQL
 
 3- O back end projeto foi concluido com a versão 2.6.6 do Spring e 4.0.0 do Maven, certifique-se das versões antes de compilar.
 
-# Front end
+## Front end
 
 1- Baixe o ZIP do projeto e extraia a pasta frontend para um local seu computador.
 
