@@ -24,6 +24,8 @@ export class ClientesFormComponent implements OnInit {
     let params : Observable<Params> = this.activatedRoute.params
     params.subscribe( urlParams => {
       this.id = urlParams['id'];
+      if(this.id){
+      }
       this.service.getClientesById(this.id).subscribe(
         response => this.cliente = response, errorResponse => this.cliente = new Cliente())
     })
