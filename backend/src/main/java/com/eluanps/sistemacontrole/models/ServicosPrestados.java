@@ -1,6 +1,7 @@
 package com.eluanps.sistemacontrole.models;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,11 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Entity
 @Data
-public class Servico {
+public class ServicosPrestados {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,16 +35,21 @@ public class Servico {
 	@Column
 	private BigDecimal valor;
 	
-	public Servico() {
+	@Column
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private LocalDate dataServico;
+	
+	public ServicosPrestados() {
 		
 	}
 	
-	public Servico(Integer id, String descricao, Cliente cliente, BigDecimal valor) {
+	public ServicosPrestados(Integer id, String descricao, Cliente cliente, BigDecimal valor, LocalDate dataServico) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.cliente = cliente;
 		this.valor = valor;
+		this.dataServico = dataServico;
 	}
 
 	public Integer getId() {
@@ -74,6 +82,14 @@ public class Servico {
 
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+	}
+	
+	public LocalDate getDataServico() {
+		return dataServico;
+	}
+	
+	public void setDataServico(LocalDate dataServico) {
+		this.dataServico = dataServico;
 	}
 	
 }
