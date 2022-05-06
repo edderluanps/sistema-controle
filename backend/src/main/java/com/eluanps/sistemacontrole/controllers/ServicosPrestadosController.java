@@ -2,12 +2,14 @@ package com.eluanps.sistemacontrole.controllers;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -53,6 +55,14 @@ public class ServicosPrestadosController {
 
 		return servicosPrestadosRepository.save(servicosPrestados);
 		
+	}
+	
+	@GetMapping
+	public List<ServicosPrestados> pesquisar(
+			@RequestParam(value = "nome", required = false, defaultValue = "") String nome,
+			@RequestParam(value = "mes", required = false) Integer mes){
+		
+		return servicosPrestadosRepository.findByNomeClienteAndMes("%" + nome + "%", mes);
 	}
 
 }

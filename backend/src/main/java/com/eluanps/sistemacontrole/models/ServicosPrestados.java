@@ -9,8 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
+import javax.persistence.ManyToOne;
+
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -27,9 +27,8 @@ public class ServicosPrestados {
 	@Column(nullable = false, length = 255)
 	private String descricao;
 	
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name = "id_cliente")
-	@Transient
 	private Cliente cliente;
 	
 	@Column
