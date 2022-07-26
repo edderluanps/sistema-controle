@@ -1,18 +1,13 @@
 package com.eluanps.sistemacontrole.controllers;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.eluanps.sistemacontrole.models.Cliente;
 import com.eluanps.sistemacontrole.models.ServicosPrestados;
@@ -21,48 +16,36 @@ import com.eluanps.sistemacontrole.repositories.ClienteRepository;
 import com.eluanps.sistemacontrole.repositories.ServicosPrestadosRepository;
 import com.eluanps.sistemacontrole.util.BigDecimalConverter;
 
-
 @RestController
 @RequestMapping("/api/servicos-prestados")
 public class ServicosPrestadosController {
-	
 
-	private final ClienteRepository clienteRepository;
-	private final ServicosPrestadosRepository servicosPrestadosRepository;
-	private final BigDecimalConverter bigDecimalConverter;
-	
-	public ServicosPrestadosController(ClienteRepository clienteRepository, ServicosPrestadosRepository servicosPrestadosRepository, BigDecimalConverter bigDecimalConverter) {
-		this.clienteRepository = clienteRepository;
-		this.servicosPrestadosRepository = servicosPrestadosRepository;
-		this.bigDecimalConverter = bigDecimalConverter;
-	}
+    private ClienteRepository clienteRepository;
+    private ServicosPrestadosRepository repository;
+    private BigDecimalConverter bigDecimalConverter;
 
-	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	public ServicosPrestados salvar(@RequestBody ServicosPrestadosDTO servicosPrestadosDTO) {
-		
-		Integer idCliente = servicosPrestadosDTO.getIdCliente();
-		LocalDate dataF = LocalDate.parse(servicosPrestadosDTO.getDataServico(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-		
-		Cliente cliente = clienteRepository.findById(idCliente).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cliente inexistente."));
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ServicosPrestados salvar(@RequestBody @Valid ServicosPrestadosDTO dto) {
+        LocalDate data = LocalDate.parse(dto.getDataServico(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        Integer idCliente = dto.getIdCliente();
 
-		
-		ServicosPrestados servicosPrestados = new ServicosPrestados();
-		servicosPrestados.setDescricao(servicosPrestadosDTO.getDescricao());
-		servicosPrestados.setDataServico(dataF);
-		servicosPrestados.setCliente(cliente);
-		servicosPrestados.setValor(bigDecimalConverter.converter(servicosPrestadosDTO.getPreco()));
+        Cliente cliente = clienteRepository.findById(idCliente).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cliente inexistente."));
 
-		return servicosPrestadosRepository.save(servicosPrestados);
-		
-	}
-	
-	@GetMapping
-	public List<ServicosPrestados> pesquisar(
-			@RequestParam(value = "nome", required = false, defaultValue = "") String nome,
-			@RequestParam(value = "mes", required = false) Integer mes){
-		
-		return servicosPrestadosRepository.findByNomeClienteAndMes("%" + nome + "%", mes);
-	}
+        ServicosPrestados servicoPrestado = new ServicosPrestados();
+        servicoPrestado.setDescricao(dto.getDescricao());
+        servicoPrestado.setDataServico(data);
+        servicoPrestado.setCliente(cliente);
+        servicoPrestado.setValor(bigDecimalConverter.converter(dto.getPreco()));
 
+        return repository.save(servicoPrestado);
+    }
+
+    @GetMapping
+    public List<ServicosPrestados> pesquisar(
+            @RequestParam(value = "nome", required = false, defaultValue = "") String nome,
+            @RequestParam(value = "mes", required = false) Integer mes
+    ) {
+        return repository.findByNomeClienteAndMes("%" + nome + "%", mes);
+    }
 }
