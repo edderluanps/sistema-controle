@@ -7,7 +7,6 @@ Aplicação Full Stack com Spring, Angular e MySQL
 * Java (JDK 17)
 * Spring Framework
 * JPA/Hibernate
-* Lombok 
 
 ## Front end
 * HTML/CSS
