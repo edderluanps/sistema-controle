@@ -10,8 +10,8 @@ Aplicação Full Stack com Spring, Angular e MySQL
 
 ## Front end
 * HTML/CSS
-* JS/TypeScript
-* Angular
+* TypeScript
+* Angular 9.1.1
 * Bootstrap 4 (Template SB Admin)
 
 ## Banco de dados
