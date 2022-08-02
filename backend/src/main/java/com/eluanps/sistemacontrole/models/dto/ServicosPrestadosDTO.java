@@ -1,8 +1,5 @@
 package com.eluanps.sistemacontrole.models.dto;
 
-import lombok.Data;
-
-@Data
 public class ServicosPrestadosDTO {
 	
 	private String descricao;
